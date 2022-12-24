@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<link th:href="@{css/op.css}" rel="stylesheet" />
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.png}"  src="../static/images/logo.png" width="auto" height="40" class="d-inline-block align-top" alt=""/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav">
+            
+                  
+                <li class="nav-item active" th:each="user : ${Admin} ">
+             <img  style="margin-top: 6px"width="30px" height="30px"  class="img-xs rounded-circle" th:src="@{${'/images/' + user.image}}" alt="Profile image">
+                 
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" th:href="@{/admin}" href="#">admin-home</a>
+                </li>
+                
+                <li class="nav-item active" th:each="user : ${Admin} ">
+                 <a class="nav-link"   th:text="${user.name}"  >Welcome back, Admin</a>
+                 
+                </li>
+                 <li class="nav-item active" th:each="user : ${Admin} ">
+                 <a class="nav-link"   th:text="${user.email}"  >Welcome back, Admin</a>
+                 
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/logout}" href="#">logout</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class = "icons">
+<a href = "#"><i class="fas fa-archive"></i></a>
+<div class = "notification">
+  <a href = "#">
+   <div class = "notBtn" href = "#"> 
+    <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
+    <div class = "number">2</div>
+    <i class="fas fa-bell"></i>
+      <div class = "box">
+        <div class = "display">
+         
+          <div class = "cont"><!-- Fold this div and try deleting evrything inbetween -->
+             <div class = "sec new">
+               <a  >
+               <div class = "profCont">
+              <!--  <img class = "profile" src = "https://c1.staticflickr.com/5/4007/4626436851_5629a97f30_b.jpg"> -->
+                </div>
+                
+                   <div class = "txt"   > </div>
+                <div  th:each="comments : ${Com} ">
+             
+                
+               
+            <div class = "txt sub" th:text="${comments.name}"> </div>
+            <h5> comment to yput</h5> 
+            
+            </div>
+               </a>
+            </div>
+        <!--      <div class = "sec new">
+               <a href = "https://codepen.io/Golez/">
+               <div class = "profCont">
+               <img class = "profile" src = "https://obamawhitehouse.archives.gov/sites/obamawhitehouse.archives.gov/files/styles/person_medium_photo/public/person-photo/amanda_lucidon22.jpg?itok=JFPi8OFJ">
+                </div>
+               <div class = "txt">Annita liked your post: "Pure css notification box"</div>
+              <div class = "txt sub">11/7 - 2:13 pm</div>
+               </a>
+            </div> -->
+            
+           
+          
+           
+         </div>
+        </div>
+     </div>
+  </div>
+    </a>
+</div>
+<a href = "#"><i class="fas fa-edit"></i></a>
+</div>
+
+</body>
+
+</html>

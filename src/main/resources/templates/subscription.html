@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+</head>
+<body>
+	<h1>evv</h1>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"> <img
+				th:src="@{/images/software-engineer.png}"
+				src="../static/images/logo.png" width="auto" height="40"
+				class="d-inline-block align-top" alt="" />
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent"
+				style="height: 50px; border-radius: 20px; background-color: #98e0bc;">
+
+
+
+
+				<!-- 	
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <div class="search-result"  style="
+    margin-left: -222px;
+    padding-top: 100px;
+    padding-left: -36px;
+" >
+   
+      </div> -->
+
+
+				<!--   Serach Functionatlu -->
+
+				<div class="search-container my-3">
+					<input id="serach-input"   onkeyup="search()"  style="width: 150px; margin-left: 155px ;"
+						class="form-control mr-sm-2" type="search" placeholder="Search"
+						
+				 />
+
+
+
+					
+					<div class="search-result">
+					<h1>this is result</h1>
+						<!-- search - result   -->
+					</div>
+
+
+				</div>
+
+
+
+
+
+				<!--         end Serach Functionatlu                           -->
+				<ul class="navbar-nav mr-auto"></ul>
+				<ul class="navbar-nav" style="padding-right: 35px;">
+
+					<li class="nav-item active" th:each="user : ${Admin} "><img
+						style="margin-top: 6px" width="30px" height="30px"
+						class="img-xs rounded-circle"
+						th:src="@{${'/images/' + user.image}}" alt="Profile image">
+
+					</li>
+
+
+					<li class="nav-item active"><a class="nav-link"
+						th:href="@{/admin/}" href="#">admin-home</a></li>
+
+					<li class="nav-item active" th:each="user : ${Admin} "><a
+						class="nav-link" th:text="${user.name}">Welcome back, Admin</a></li>
+					<li class="nav-item active" th:each="user : ${Admin} "><a
+						class="nav-link" th:text="${user.email}">Welcome back, Admin</a></li>
+					<li class="nav-item active"><a class="nav-link"
+						th:href="@{/logout}" href="#">logout</a></li>
+
+				</ul>
+
+			</div>
+		</div>
+	</nav>
+
+
+	<table class="table">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">Subscription No</th>
+				<th scope="col">Subscription Email</th>
+
+
+
+				<th scope="col">Delete</th>
+
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr th:each="subscibe : ${subscibes}">
+				<td th:text="${subscibe.id}">Larry</td>
+				<td th:text="${subscibe.email}">Larry</td>
+
+				<td><a class="bn31" href="/"
+					th:href="@{/admin/operation/Subcription{id}(id=${subscibe.id})}"><span
+						class="bn31span">Delete</span></a></td>
+
+				<!--  <td><a href="" th:href="@{/admin/blog/delete/{id}(id=${blog.id})}" class="btn btn-danger">Delete</a></td> -->
+
+
+			</tr>
+		</tbody>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<Style type="text/css">
+.search-container {
+	position: relative;
+}
+.search-result{
+margin-left:150px;
+position: absolute;
+background: white;
+width: 100%;
+border: 1px solid gray;
+padding: 10px;
+display: none;
+}
+
+</Style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <script >
+ 
+ const search = () => {
+	  console.log("searching.....");
+	  let query = $("#serach-input").val();
+
+	  if (query == "") {
+	    $(".search-result").hide();
+	  } else {
+
+
+
+		    let url = 'http://localhost:8080/search/{email}';
+
+		    fetch(url).then((response)=>{
+
+		        return response.json(); 
+
+		    }).then((data)=>{
+
+		        console.log(data);
+		    });
+
+		    console.log(query);
+		    $(".search-result").show();
+	  }
+	};
+
+ 
+ 
+ 
+ 
+ </script>
+<script src="jquery-3.6.1.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+</body>
+</html>

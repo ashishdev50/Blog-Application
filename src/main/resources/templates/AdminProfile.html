@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+<!--  All snippets are MIT license http://bootdey.com/license -->
+<title>bs5 edit profile account details - Bootdey.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container-xl px-4 mt-4">
+		<!-- Account page navigation-->
+		<nav class="navbar navbar-expand-lg navbar-light "
+			style="border-radius: 34px; background-color: #90ecff">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#"> <img
+					th:src="@{/images/logo.png}" src="../static/images/logo.png"
+					width="auto" height="40" class="d-inline-block align-top" alt="" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto"></ul>
+					<ul class="navbar-nav">
+
+
+
+
+						<li class="nav-item active" th:each="user : ${user} "><img
+							style="margin-top: 6px" width="30px" height="30px"
+							class="img-xs rounded-circle"
+							th:src="@{${'/images/' + user.image}}" alt="Profile image">
+
+						</li>
+						<li class="nav-item active"><a class="nav-link"
+							th:href="@{/admin/}" href="#">admin-home</a></li>
+
+						<li class="nav-item active" th:each="user : ${user} "><a
+							class="nav-link" th:text="${user.name}">Welcome back, Admin</a></li>
+						<li class="nav-item active" th:each="user : ${user} "><a
+							class="nav-link" th:text="${user.email}">Welcome back, Admin</a></li>
+						<li class="nav-item active"><a class="nav-link"
+							th:href="@{/logout}" href="#">logout</a></li>
+
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+		<hr class="mt-0 mb-4">
+
+
+
+		<div>
+
+			<form th:action="@{/admin/adminprofile/{id} (id=${user.id})}"
+				method="post" th:object="${photos}" enctype="multipart/form-data">
+
+
+				<div class="row">
+
+					<div class="col-xl-4">
+						<!-- Profile picture card-->
+						<div class="card mb-4 mb-xl-0"
+							style="border-radius: 25px; border-color: #19d8ff;">
+							<div class="card-header">Profile Picture</div>
+
+							<div class="card-body text-center">
+								<!-- Profile picture image-->
+
+
+								<div class="nav-item active" th:each="user : ${user} ">
+									<img class="img-account-profile rounded-circle mb-2"
+										th:src="@{${'/images/' + user.image}}" alt="Profile image">
+
+								</div>
+
+								<!-- Profile picture help block-->
+								<div class="small font-italic text-muted mb-4">JPG or PNG
+									no larger than 5 MB</div>
+								<!-- Profile picture upload button-->
+
+
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" name="file"
+										accept="image/jpeg, image/png" id="productImage" /> <label
+										class="custom-file-label" for="productImage">Choose
+										file</label>
+								</div>
+								<button style="margin-top: 20px" type="submit"
+									class="btn btn-primary">Submit</button>
+
+
+							</div>
+						</div>
+
+
+
+
+					</div>
+
+
+					<div class="col-xl-8">
+						<!-- Account details card-->
+						<div class="card mb-4"
+							style="border-radius: 25px; border-color: #19d8ff;">
+							<div class="card-header">
+								Account Details
+								<div class="card-body">
+									<!-- Form Group (username)-->
+									<div class="mb-3">
+										<label class="small mb-1" for="inputEmailAddress">Email
+											address</label> <input class="form-control" id="inputEmailAddress"
+											th:value="${user.email}" name="email" type="email"
+											placeholder="Enter your email address">
+									</div>
+									<!-- Form Row-->
+									<div class="row gx-3 mb-3">
+										<!-- Form Group (first name)-->
+
+										<div class="col-md-6">
+											<label class="small mb-1" for="inputFirstName">First
+												name</label> <input type="text" class="form-control" name="name"
+												th:value="${user.name}" id="name">
+
+										</div>
+										<div class="col-md-6">
+											<label class="small mb-1" for="inputOrgName"> Summary
+											</label> <input class="form-control" id="inputOrgName" type="text"
+												th:value="${user.summary}" name="summary"
+												placeholder="Enter your organization name">
+										</div>
+									</div>
+									<!-- Form Row        -->
+									<div class="row gx-3 mb-3">
+										<!-- Form Group (organization name)-->
+
+										<!-- Form Group (location)-->
+										<div class="col-md-6">
+											<label class="small mb-1" for="inputLocation">Location</label>
+											<input class="form-control" id="inputLocation" type="text"
+												th:value="${user.address}" name="address"
+												placeholder="Enter your location">
+										</div>
+										<div class="col-md-6">
+											<label class="small mb-1" for="inputPhone">Phone
+												number</label> <input class="form-control" id="inputPhone"
+												th:value="${user.phoneno}" type="tel" name="phoneno"
+												placeholder="Enter your phone number">
+										</div>
+									</div>
+									<div class="mb-3">
+										<label class="small mb-1" for="inputEmailAddress">
+											About Title </label> <input class="form-control"
+											id="inputEmailAddress" th:value="${user.abouttitle}"
+											name="abouttitle" placeholder="Enter Title">
+									</div>
+									<div class="form-group">
+										<label for="description">About Description</label>
+										<textarea type="text" class="form-control" rows="5" name="aboutdecription"
+											 id="description"> [[${user.aboutdecription}]]</textarea>
+									</div>
+									<!-- 	instagram -->
+									<div class="col-md-6">
+										<label class="small mb-1" for="inputPhone"> Instagram</label>
+										<img th:src="@{/images/Account Suspended.png}"
+											style="width: 32px" height="32px"
+											; src="../static/images/Account Suspended.png" /> <input
+											class="form-control" style="width: 219px; height: 10px;"
+											th:value="${user.insta}"  name="insta"
+											placeholder="Enter your Instagram link">
+									</div>
+									<!-- linkdin -->
+
+									<div class="col-md-6">
+										<label class="small mb-1" for="inputPhone"> Linkdin</label> <img
+											th:src="@{/images/Splash-Linkedin-Icon-PNG_yuws2e.png}"
+											style="height: 21px; margin-left: 20px; width: 24px;"
+											height="28px";
+											 src="../static/images/Splash-Linkedin-Icon-PNG_yuws2e.png" />
+										<input class="form-control"
+											style="width: 219px; height: 10px;"
+											th:value="${user.linkdin}"  name="linkdin"
+											placeholder="Enter your linkdin link">
+									</div>
+
+									<!-- facebook -->
+
+									<div class="col-md-6">
+										<label class="small mb-1" for="inputPhone"> Facebook</label> <img
+											th:src="@{/images/Facebook Logo Splash Design Icon - 1850x1850.png}"
+											style="width: 31px" height="31px"
+											; src="../static/images/Facebook Logo Splash Design Icon - 1850x1850.png" />
+										<input class="form-control"
+											style="width: 219px; height: 10px;" th:value="${user.facebook}"
+											 name="facebook" placeholder="Enter your faceebook link">
+									</div>
+
+									<!-- 	Tweeter -->
+									<div class="col-md-6">
+										<label class="small mb-1" for="inputPhone"> Tweeter</label> <img
+											th:src="@{/images/pngkit_twitter-icon-png_4979790.png}"
+											style="height: 21px; margin-left: 19px; width: 21px;"
+											height="28px";
+											 src="../static/images/pngkit_twitter-icon-png_4979790.png" />
+										<input class="form-control"
+											style="width: 219px; height: 10px;" th:value="${user.tweeter}"
+											 name="tweeter" placeholder="Enter your Tweeter link">
+									</div>
+
+
+								</div>
+								<!-- Save changes button-->
+								<button style="margin-top: 20px" type="submit"
+									class="btn btn-primary">Submit</button>
+
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+				<!--  -------------------------------->
+			</form>
+		</div>
+	</div>
+	</div>
+
+	<style type="text/css">
+.fa {
+	padding: 20px;
+	font-size: 30px;
+	width: 50px;
+	text-align: center;
+	text-decoration: none;
+	margin: 5px 2px;
+}
+
+.fa:hover {
+	opacity: 0.7;
+}
+
+.fa-facebook {
+	background: #3B5998;
+	color: white;
+}
+
+.fa-twitter {
+	background: #55ACEE;
+	color: white;
+}
+
+.fa-google {
+	background: #dd4b39;
+	color: white;
+}
+
+.fa-linkedin {
+	background: #007bb5;
+	color: white;
+}
+
+.fa-youtube {
+	background: #bb0000;
+	color: white;
+}
+
+.fa-instagram {
+	background: #125688;
+	color: white;
+}
+
+.fa-pinterest {
+	background: #cb2027;
+	color: white;
+}
+
+.fa-snapchat-ghost {
+	background: #fffc00;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.fa-skype {
+	background: #00aff0;
+	color: white;
+}
+
+.fa-android {
+	background: #a4c639;
+	color: white;
+}
+
+.fa-dribbble {
+	background: #ea4c89;
+	color: white;
+}
+
+.fa-vimeo {
+	background: #45bbff;
+	color: white;
+}
+
+.fa-tumblr {
+	background: #2c4762;
+	color: white;
+}
+
+.fa-vine {
+	background: #00b489;
+	color: white;
+}
+
+.fa-foursquare {
+	background: #45bbff;
+	color: white;
+}
+
+.fa-stumbleupon {
+	background: #eb4924;
+	color: white;
+}
+
+.fa-flickr {
+	background: #f40083;
+	color: white;
+}
+
+.fa-yahoo {
+	background: #430297;
+	color: white;
+}
+
+.fa-soundcloud {
+	background: #ff5500;
+	color: white;
+}
+
+.fa-reddit {
+	background: #ff5700;
+	color: white;
+}
+
+.fa-rss {
+	background: #ff6600;
+	color: white;
+}
+
+body {
+	margin-top: 20px;
+	background-color: #f2f6fc;
+	color: #69707a;
+}
+
+.img-account-profile {
+	height: 10rem;
+}
+
+.rounded-circle {
+	border-radius: 50% !important;
+}
+
+.card {
+	box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50/ 15%);
+}
+
+.card .card-header {
+	font-weight: 500;
+}
+
+.card-header:first-child {
+	border-radius: 0.35rem 0.35rem 0 0;
+}
+
+.card-header {
+	padding: 1rem 1.35rem;
+	margin-bottom: 0;
+	background-color: rgba(33, 40, 50, 0.03);
+	border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
+
+.form-control, .dataTable-input {
+	display: block;
+	width: 100%;
+	padding: 0.875rem 1.125rem;
+	font-size: 0.875rem;
+	font-weight: 400;
+	line-height: 1;
+	color: #69707a;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #c5ccd6;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border-radius: 0.35rem;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.nav-borders .nav-link.active {
+	color: #0061f2;
+	border-bottom-color: #0061f2;
+}
+
+.nav-borders .nav-link {
+	color: #69707a;
+	border-bottom-width: 0.125rem;
+	border-bottom-style: solid;
+	border-bottom-color: transparent;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-left: 0;
+	padding-right: 0;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+</style>
+
+	<script type="text/javascript">
+		
+	</script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+</body>
+</html>
